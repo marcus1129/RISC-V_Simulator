@@ -109,8 +109,24 @@ void printRegisters(struct registerBank *registers){
 }
 
 int main(void){
+    unsigned char **programMemory;
+
+    programMemory = calloc(128, sizeof *programMemory);
+    for (int i = 0; i < 128; i++){
+        programMemory[i] = calloc(32, sizeof *(programMemory[i]));
+    }
+
+    int instructionCount = 0;
     struct registerBank registers;
+    FILE *fp;
     initRegisters(&registers);
+    fetchProgram(fp, programMemory, &instructionCount);
     printRegisters(&registers);
+    for(int x = 0; x < 128; x++){
+        for(int z = 0; z < 32; z++){
+            printf("%c", programMemory[x][z]);
+        }
+    }
+    free(programMemory);
     return 0;
 }
