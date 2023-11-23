@@ -109,35 +109,32 @@ void printRegisters(struct registerBank *registers){
     printf("x31: 0x%X\n", registers->x31);
 }
 
-void printProgramMemory(unsigned char** programMemory){
+void printProgramMemory(unsigned int* programMemory){
     printf("Program Memory:\n");
     for(int x = 0; x < 128; x++){
-        printf("%i: ", x);
-        for(int z = 0; z < 32; z++){
-            printf("%c", programMemory[x][z]);
-        }
-        printf("\n");
+        printf("%i: 0x%08X\n", x, programMemory[x]);
+    }
+}
+
+void printMemory(unsigned int* memory){
+    printf("Memory:\n");
+    for(int x = 0; x < 1024; x++){
+        printf("%i: 0x%08X\n", x, memory[x]);
     }
 }
 
 int main(void){
-    unsigned char **programMemory;
+    unsigned int *programMemory = calloc(128, sizeof(int));
     unsigned int *memory = calloc(1024, sizeof(int));
-
-    // Allocates space for 128 32-bit instructions
-    programMemory = calloc(128, sizeof *programMemory);
-    for (int i = 0; i < 128; i++){
-        programMemory[i] = calloc(32, sizeof *(programMemory[i]));
-    }
 
     int instructionCount = 0;
     struct registerBank registers;
     FILE *fp;
     initRegisters(&registers);
-    //fetchProgram(fp, programMemory, &instructionCount);
-    //printRegisters(&registers);
+    fetchProgram(fp, programMemory, &instructionCount);
+    printRegisters(&registers);
     //printProgramMemory(programMemory);
-
+    //printMemory(memory);
     free(programMemory);
     return 0;
 }
