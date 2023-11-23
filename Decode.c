@@ -25,14 +25,6 @@ void fetchProgram(FILE *fp, unsigned int* programMemory, int* instructionCount){
     }
 }
 
-void fetchInstruction(){
-
-}
-
 void decodeInstruction(){
 
-}
-
-void executeInstruction(){
-    
 }

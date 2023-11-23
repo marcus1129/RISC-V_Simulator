@@ -4,8 +4,6 @@
 #include <stdlib.h>
 
 extern void fetchProgram(FILE *fp, unsigned int* programMemory, int* instructionCount);
-extern void fetchInstruction();
 extern void decodeInstruction();
-extern void executeInstruction();
 
 #endif /*DECODE_H_*/
