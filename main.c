@@ -122,13 +122,7 @@ void printProgramMemory(unsigned char** programMemory){
 
 int main(void){
     unsigned char **programMemory;
-    unsigned char **memory;
-
-    // Allocates 4KB of memory
-    memory = calloc(128, sizeof *programMemory);
-    for (int i = 0; i < 4096; i++){
-        programMemory[i] = calloc(8, sizeof *(programMemory[i]));
-    }
+    unsigned int *memory = calloc(1024, sizeof(int));
 
     // Allocates space for 128 32-bit instructions
     programMemory = calloc(128, sizeof *programMemory);
@@ -140,9 +134,10 @@ int main(void){
     struct registerBank registers;
     FILE *fp;
     initRegisters(&registers);
-    fetchProgram(fp, programMemory, &instructionCount);
-    printRegisters(&registers);
-    printProgramMemory(programMemory);
+    //fetchProgram(fp, programMemory, &instructionCount);
+    //printRegisters(&registers);
+    //printProgramMemory(programMemory);
+
     free(programMemory);
     return 0;
 }
