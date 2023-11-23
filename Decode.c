@@ -10,13 +10,13 @@ void fetchProgram(FILE *fp, unsigned char** programMemory, int* instructionCount
         exit(EXIT_FAILURE);
     }
     while((c = fgetc(fp)) != EOF) {
-        instruction[n++] = (char) c;
+        instruction[n] = (char) c;
+        n += 1;
         if(n == 32){
-            printf("har");
             strcpy(programMemory[*instructionCount], instruction);
             strcpy(instruction, "");
-            //memset(instruction, '\0', 32);
             n = 0;
+            *instructionCount += 1;
         }
     }
     fclose(fp);
