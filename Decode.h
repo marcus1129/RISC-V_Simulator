@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-extern void fetchProgram(FILE *fp, unsigned int* programMemory, int* instructionCount);
+extern void fetchProgram();
 extern void decodeInstruction();
 
 #endif /*DECODE_H_*/

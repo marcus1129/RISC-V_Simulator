@@ -1,8 +1,12 @@
 #include "Decode.h"
 #include <string.h>
 
-void fetchProgram(FILE *fp, unsigned int* programMemory, int* instructionCount){
-    char *endptr; 
+extern unsigned int* programMemory;
+
+void fetchProgram(){
+    FILE *fp;
+    char *endptr;
+    int instructionCount = 0;
     size_t n = 0;
     char c;
     char* instruction = calloc(32, sizeof(char));
@@ -13,8 +17,8 @@ void fetchProgram(FILE *fp, unsigned int* programMemory, int* instructionCount){
     while((c = fgetc(fp)) != EOF) {
         instruction[n++] = (char) c;
         if(n == 32){
-            programMemory[*instructionCount] = strtol(instruction, &endptr, 2);
-            *instructionCount += 1;
+            programMemory[instructionCount] = strtol(instruction, &endptr, 2);
+            instructionCount += 1;
             strcpy(instruction, "");
             n = 0;
         }
